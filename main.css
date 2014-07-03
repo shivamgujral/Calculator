@@ -23,13 +23,13 @@ main {
 
 .buttons-left{
 
-  animation:fly-in-from-left .8s .2s ease both;
+  animation:fly-in-from-left .8s 1s ease both;
   transform-origin:top right;
 }
 
 .buttons-right{
 
-  animation:fly-in-from-right .8s .2s ease both;
+  animation:fly-in-from-right .8s 1s ease both;
   transform-origin:top left;
 }
 
@@ -46,7 +46,6 @@ main {
     opacity:0;
   }
 }
-
 
 .card {
   position:relative;
