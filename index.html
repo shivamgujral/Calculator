@@ -4,45 +4,66 @@
 <head>
 <title>Calculator</title>
 <link rel="stylesheet" href="main.css">
+
+<script>
+function getinput(elem)
+{
+  //var io;
+  //alert(elem.value);
+  //io = document.getElementById(id).value;
+  document.getElementById("display").value += elem;
+}
+
+function clear_all(elem)
+{
+   document.getElementById("display").value = "";  
+}
+
+function equals(elem)
+{
+  document.getElementById("display").value = ans;
+}
+
+</script>
 </head>
-<body >
+<body>
 
 <br/>
 <main>
  <section class="card">
-<input placeholder="Enter input">
+<input id="display" placeholder="Enter input" onLoad="clear_all(this)">
        <br/>
 <div class="row">
 <table align="center">
 <tr>
-	<td><a href="" class="round-button buttons-left">C</a></td>
-	<td><a href="" class="round-button buttons-right">/</a></td>
-	<td><a href="" class="round-button buttons-left">X</a></td>
-    <td><a href="" class="round-button buttons-right"><=</a></td>
+	<td ><a id="C" class="round-button buttons-left" onClick="clear_all(this.id)" value="C">C</a></td>
+	<td ><a id="/"  class="round-button buttons-right" onClick="getinput(this.id)" value="/">/</a></td>
+	<td ><a id="X" class="round-button buttons-left" onClick="getinput(this.id)" value="X">X</a></td>
+        <td ><a id="(" class="round-button buttons-right" onClick="getinput(this.id)" value="("><=</a></td>
 </tr>
 <tr> 
-	<td><a href="" class="round-button buttons-left">7</a></td>
-	<td><a href="" class="round-button buttons-right">8</a></td>
-	<td><a href="" class="round-button buttons-right">9</a></td>
-    <td><a href="" class="round-button buttons-left">-</a></td>
+	<td ><a id="7" class="round-button buttons-left" onClick="getinput(this.id)" value="7">7</a></td>
+	<td ><a id="8" class="round-button buttons-right" onClick="getinput(this.id)" value="8">8</a></td>
+	<td ><a id="9" class="round-button buttons-right" onClick="getinput(this.id)" value="9">9</a></td>
+        <td ><a id="-" class="round-button buttons-left" onClick="getinput(this.id)" value="-">-</a></td>
 </tr>
 <tr> 
-    <td><a href="" class="round-button buttons-right">4</a></td>
-    <td><a href="" class="round-button buttons-left">5</a></td>
-    <td><a href="" class="round-button buttons-right">6</a></td>
-    <td><a href="" class="round-button buttons-left">+</a></td>
+    <td ><a id="4" class="round-button buttons-right" onClick="getinput(this.id)" value="4">4</a></td>
+    <td ><a id="5" class="round-button buttons-left" onClick="getinput(this.id)" value="5">5</a></td>
+    <td ><a id="6" class="round-button buttons-right" onClick="getinput(this.id)" value="6">6</a></td>
+    <td ><a id="+" class="round-button buttons-left" onClick="getinput(this.id)" value="+">+</a></td>
 </tr>
 <tr> 
-    <td><a href="" class="round-button buttons-right">1</a></td>
-    <td><a href="" class="round-button buttons-left">2</a></td>
-    <td><a href="" class="round-button buttons-left">3</a></td>
-    <td><a href="" class="round-button buttons-right">( )</a></td>
+    <td><a id="1" class="round-button buttons-right" onClick="getinput(this.id)" value="1">1</a></td>
+    <td><a id="2" class="round-button buttons-left" onClick="getinput(this.id)" value="2">2</a></td>
+    <td><a id="3" class="round-button buttons-left" onClick="getinput(this.id)" value="3">3</a></td>
+    <td><a id=")" class="round-button buttons-right" onClick="getinput(this.id)" value=")">)</a></td>
 </tr>
 <tr> 
-    <td><a href="" class="round-button buttons-left">0</a></td>
-    <td><a href="" class="round-button buttons-right">.</a></td>
-    <td><a href="" class="round-button buttons-left">+/-</a></td>
-    <td><a href="" class="round-button buttons-right">=</a></td>
+    <td><a id="0" class="round-button buttons-left" onClick="getinput(this.id)" value="0">0</a></td>
+    <td><a id="." class="round-button buttons-right" onClick="getinput(this.id)" value=".">.</a></td>
+    <td><a id="-" class="round-button buttons-left" onClick="getinput(this.id)" value="-">+/-</a></td>
+    <td><a id="=" class="round-button buttons-right" onClick="equals(this.id)" value="=">=</a></td>
 </tr>
 
 </table>
