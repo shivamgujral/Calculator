@@ -6,15 +6,102 @@
 <link rel="stylesheet" href="main.css">
 
 <script>
+
+var inputs=[];
+var Tokens=[];
+var tokens_num=[];
+var tokens_op=[];
+var Tokens_=[];
+var separators = ['\\\+', '-', '\\\(', '\\\)', '\\*', '/'];
+var operators = ['+','-','*','/','(',')'];
+ var k=0;
+
 function getinput(elem)
-{
-  //var io;
-  //alert(elem.value);
-  //io = document.getElementById(id).value;
-  document.getElementById("display").value += elem;
+{   Tokens=[];
+    tokens_num=[];
+    tokens_op=[];
+    Tokens_=[];
+//  console.log(elem+",")
+  if(elem=="=")
+  {
+     createString();
+  } 
+  else 
+   {
+     document.getElementById("display").value += elem;
+    }
+
+  }
+
+function isOperator(arr,obj)
+{  
+   return (arr.indexOf(obj) != -1);      
 }
 
-function clear_all(elem)
+function createString()
+{ 
+   
+   inputs[localStorage.index_current]=document.getElementById("display").value;
+   localStorage["inputs"] = JSON.stringify(inputs);  
+   parseInput(document.getElementById("display").value);
+   localStorage.index_current = Number(localStorage.index_current)+1;
+   
+}
+
+function parseInput(text)
+{
+   tokens_num = text.split(new RegExp(separators.join('|'), 'g'));
+  //console.log(tokens_num);
+ for(var i=0;i<text.length;i++)
+ {
+  if(isOperator(operators,text.charAt(i)))
+    { 
+     tokens_op.push(text.charAt(i));
+     }  
+ }
+ console.log(tokens_num);
+ console.log(tokens_op);
+  var i=0;j=0
+  for(var k=0;k<(tokens_num.length+tokens_op.length);)
+  {
+    if(tokens_op[j]!="(" || tokens_op[j]!=")")
+    {
+      Tokens.push(tokens_num[i]);
+      k++;
+      Tokens.push(tokens_op[j]);
+      k++;  i++; j++;
+    }
+    else
+    {
+      Tokens.push(tokens_op[j]);
+      k++;  j++;
+    }
+  }
+  console.log(Tokens);
+  
+  for(var k=0;k<Tokens.length;k++)
+    {
+      if( Tokens[k]!="")
+       {
+          Tokens_.push(Tokens[k]); 
+       }
+    }
+    console.log(Tokens_);
+}
+ 
+  
+
+
+function updateScreen()
+{   alert("aok!");
+    document.getElementById("display").value= "";
+    if (!localStorage.index_current)   
+     {
+      localStorage.index_current = 0;
+     }
+}
+
+function clear_all()
 {
    document.getElementById("display").value = "";  
 }
@@ -24,6 +111,7 @@ function equals(elem)
   document.getElementById("display").value = ans;
 }
 
+window.onload=updateScreen;
 </script>
 </head>
 <body>
@@ -31,14 +119,14 @@ function equals(elem)
 <br/>
 <main>
  <section class="card">
-<input id="display" placeholder="Enter input" onLoad="clear_all(this)">
+<input id="display" placeholder="Enter input" onLoad="clear_all()">
        <br/>
 <div class="row">
 <table align="center">
 <tr>
-	<td ><a id="C" class="round-button buttons-left" onClick="clear_all(this.id)" value="C">C</a></td>
+	<td ><a id="C" class="round-button buttons-left" onClick="clear_all()" value="C">C</a></td>
 	<td ><a id="/"  class="round-button buttons-right" onClick="getinput(this.id)" value="/">/</a></td>
-	<td ><a id="X" class="round-button buttons-left" onClick="getinput(this.id)" value="X">X</a></td>
+	<td ><a id="*" class="round-button buttons-left" onClick="getinput(this.id)" value="X">X</a></td>
         <td ><a id="(" class="round-button buttons-right" onClick="getinput(this.id)" value="("><=</a></td>
 </tr>
 <tr> 
@@ -63,7 +151,7 @@ function equals(elem)
     <td><a id="0" class="round-button buttons-left" onClick="getinput(this.id)" value="0">0</a></td>
     <td><a id="." class="round-button buttons-right" onClick="getinput(this.id)" value=".">.</a></td>
     <td><a id="-" class="round-button buttons-left" onClick="getinput(this.id)" value="-">+/-</a></td>
-    <td><a id="=" class="round-button buttons-right" onClick="equals(this.id)" value="=">=</a></td>
+    <td><a id="=" class="round-button buttons-right" onClick="getinput(this.id)" value="=">=</a></td>
 </tr>
 
 </table>
