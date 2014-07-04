@@ -1,33 +1,14 @@
 <!--Calculator index.html 03/07/2014 -->
 <!DOCTYPE html>
 <html>
+
 <head>
 <title>Calculator</title>
 <link rel="stylesheet" href="main.css">
-
-<script>
-function getinput(elem)
-{
-  //var io;
-  //alert(elem.value);
-  //io = document.getElementById(id).value;
-  document.getElementById("display").value += elem;
-}
-
-function clear_all(elem)
-{
-   document.getElementById("display").value = "";  
-}
-
-function equals(elem)
-{
-  document.getElementById("display").value = ans;
-}
-
-</script>
+<script src="Shunting_yard.js"></script>
 </head>
-<body>
 
+<body>
 <br/>
 <main>
  <section class="card">
@@ -36,7 +17,7 @@ function equals(elem)
 <div class="row">
 <table align="center">
 <tr>
-	<td ><a id="C" class="round-button buttons-left" onClick="clear_all(this.id)" value="C">C</a></td>
+	<td ><a id="C" class="round-button buttons-left" onClick="clear_all()" value="C">C</a></td>
 	<td ><a id="/"  class="round-button buttons-right" onClick="getinput(this.id)" value="/">/</a></td>
 	<td ><a id="X" class="round-button buttons-left" onClick="getinput(this.id)" value="X">X</a></td>
         <td ><a id="(" class="round-button buttons-right" onClick="getinput(this.id)" value="("><=</a></td>
@@ -63,7 +44,7 @@ function equals(elem)
     <td><a id="0" class="round-button buttons-left" onClick="getinput(this.id)" value="0">0</a></td>
     <td><a id="." class="round-button buttons-right" onClick="getinput(this.id)" value=".">.</a></td>
     <td><a id="-" class="round-button buttons-left" onClick="getinput(this.id)" value="-">+/-</a></td>
-    <td><a id="=" class="round-button buttons-right" onClick="equals(this.id)" value="=">=</a></td>
+    <td><a id="=" class="round-button buttons-right" onClick="equals()" value="=">=</a></td>
 </tr>
 
 </table>
