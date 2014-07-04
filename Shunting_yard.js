@@ -60,8 +60,10 @@ function parseInput(text)
            tokens_op.push(text.charAt(i));
           }  
      }
- console.log(tokens_num);
- console.log(tokens_op);
+ //console.log(tokens_num);
+ //console.log(tokens_op);
+  
+
   var i=0;j=0
   for(var k=0;k<(tokens_num.length+tokens_op.length);)
   {
@@ -78,7 +80,7 @@ function parseInput(text)
       k++;  j++;
     }
   }
-  console.log(Tokens);
+  //console.log(Tokens);
   
   for(var k=0;k<Tokens.length;k++)
     {
@@ -87,7 +89,7 @@ function parseInput(text)
           Tokens_.push(Tokens[k]); 
        }
     }
-    console.log(Tokens_);
+    //console.log(Tokens_);
 
 
     return Tokens_;
