@@ -4,9 +4,34 @@ var Tokens=[];
 var tokens_num=[];
 var tokens_op=[];
 var Tokens_=[];
+var stack_brak=[];
+var stack_p=-1;
 var separators = ['\\\+', '-', '\\\(', '\\\)', '\\*', '/'];
 var operators = ['+','-','*','/','(',')'];
- var k=0;
+var k=0,prev;
+
+function decide_brak()
+{
+  if(stack_p == -1)
+  {
+    stack_brak[++stack_p] = "(";
+    return '(';  
+  }
+  else
+  {
+    if(!isOperator(operators,prev))
+    {  
+      stack_p--;
+      return ')';
+    }
+    else
+    {
+      stack_brak[++stack_p] = "(";
+      return '(';
+    }  
+  }
+
+}
 
 function getinput(elem)
 {   
@@ -15,15 +40,28 @@ function getinput(elem)
     tokens_num=[];
     tokens_op=[];
     Tokens_=[];
-
+  
   if(elem=="=")
   {
+     if(stack_p != -1)
+      alert("Undefined Expression");
      createString();
-  } 
-  else 
-   {
+  }
+  else if(elem=="()")
+  {
+     elem1 = decide_brak();
+     document.getElementById("display").value += elem1;
+  }
+  else if (elem == "(-")
+  {
      document.getElementById("display").value += elem;
-    }
+     stack_brak[++stack_p] = "(";
+  }
+  else 
+  {
+     document.getElementById("display").value += elem;
+  }
+  prev = elem;
 }
 
  //Checks Whether input is operator or not !
@@ -111,6 +149,7 @@ function updateScreen()
  function clear_all()
  {
    document.getElementById("display").value = "";  
+   stack_p = -1;
   }
 
 
@@ -157,6 +196,11 @@ for( i=0; i<t.length-1 ; i++)
    if ( t[i] == '(' ) // push ( to stack for operators
    {
      stack_oper[stack_oper_p++] = t[i];
+     if(t[i+1] == '-')
+     {
+       t[i+2] = -t[i+2];
+       i++;
+     }
    }
    else if ( t[i] == ')' ) // pop stack for operators until found ( but not show (
    {
