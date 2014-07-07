@@ -76,12 +76,11 @@ input {
     height:100px;
     line-height:100px;
     border-radius: 50%;
-    color:#f5f5f5;
+    color:#000000;
     text-align:center;
     text-decoration:none;
     background: #FFA62F;
-    font-size:28px;
-    
+    font-size:28px;    
 }
 
 
