@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="main.css">
 
 <script src="Shunting_yard.js"></script>
+
 </head>
 
 <body>
@@ -18,10 +19,17 @@
 <div class="row">
 <table align="center">
 <tr>
+  <td ><a id="history" class="round-button buttons-left" onClick="getPreviousTransaction()" value="">History</a></td>
+  <td></td>
+  <td></td>
+  <td ><a id="reset" class="round-button buttons-left" onClick="resetHistory()" value="">Reset</a></td>
+
+</tr>
+<tr>
 	<td ><a id="C" class="round-button buttons-left" onClick="clear_all()" value="C">C</a></td>
 	<td ><a id="/"  class="round-button buttons-right" onClick="getinput(this.id)" value="/">/</a></td>
 	<td ><a id="*" class="round-button buttons-left" onClick="getinput(this.id)" value="X">X</a></td>
-        <td ><a id="(" class="round-button buttons-right" onClick="getinput(this.id)" value="("><=</a></td>
+        <td ><a id="back" class="round-button buttons-right" onClick="getinput(this.id)" value=""><img src="delete.png" width="50px"></img></a></td>
 </tr>
 <tr> 
 	<td ><a id="7" class="round-button buttons-left" onClick="getinput(this.id)" value="7">7</a></td>
@@ -39,7 +47,8 @@
     <td><a id="1" class="round-button buttons-right" onClick="getinput(this.id)" value="1">1</a></td>
     <td><a id="2" class="round-button buttons-left" onClick="getinput(this.id)" value="2">2</a></td>
     <td><a id="3" class="round-button buttons-left" onClick="getinput(this.id)" value="3">3</a></td>
-    <td><a id="()" class="round-button buttons-right" onClick="getinput(this.id)" value="()">())</a></td>
+    <td><a id="()" class="round-button buttons-right" onClick="getinput(this.id)" value="()">( )</a></td>
+
 </tr>
 <tr> 
     <td><a id="0" class="round-button buttons-left" onClick="getinput(this.id)" value="0">0</a></td>

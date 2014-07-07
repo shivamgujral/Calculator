@@ -8,6 +8,7 @@ var stack_brak=[];
 var stack_p=-1;
 var separators = ['\\\+', '-', '\\\(', '\\\)', '\\*', '/'];
 var operators = ['+','-','*','/','(',')'];
+var index;
 var k=0,prev;
 
 function decide_brak()
@@ -36,17 +37,26 @@ function decide_brak()
 function getinput(elem)
 {   
     //Reseting Tokens on every Reload
+    var str = document.getElementById("display").value; 
+    var current_pos=doGetCaretPosition(document.getElementById("display"));
+
+  if(elem=="=")
+  {
     Tokens=[];
     tokens_num=[];
     tokens_op=[];
-    Tokens_=[];
-  
-  if(elem=="=")
-  {
-     if(stack_p != -1)
-      alert("Undefined Expression");
-     createString();
+    Tokens_=[];   
+    if(stack_p != -1)
+    alert("Undefined Expression");
+    createString();
   }
+  else if(elem=="back") 
+  {
+  //alert(current_pos);
+   del_prev(str,current_pos-1);
+   index=localStorage.index_current-1;
+ } 
+  
   else if(elem=="()")
   {
      elem1 = decide_brak();
@@ -58,11 +68,64 @@ function getinput(elem)
      stack_brak[++stack_p] = "(";
   }
   else 
-  {
-     document.getElementById("display").value += elem;
-  }
+   {
+
+    // To input at current caret position. 
+     var str1 = str.substring(0,current_pos);
+     str1=str1.concat(elem);
+     var str2 = str.substring(current_pos,str.length);
+     console.log(str1 + " " + str2);
+     document.getElementById("display").value = str1.concat(str2);
+    }
   prev = elem;
 }
+
+
+function resetHistory()
+{
+  localStorage.index_current=0;
+
+  localStorage.inputs="";
+
+}
+
+function getPreviousTransaction()
+{
+  
+  var storedInputs = JSON.parse(localStorage["inputs"]);
+  
+  document.getElementById("display").value=storedInputs[index];
+
+  if(index>0)index--;
+
+}
+
+//Backspace Functionality i.e Deletes character before caret position
+function del_prev(str,pos)
+{
+ 
+ var str1 = str.substring(0,pos);
+ var str2 = str.substring(pos+1,str.length);
+ console.log(str1 + " " + str2);
+ document.getElementById("display").value= str1.concat(str2);
+
+}
+
+//Edit the input using Backspace input key.
+function doGetCaretPosition (ctrl) {
+  var CaretPos = 0; // IE Support
+  if (document.selection) {
+  ctrl.focus ();
+    var Sel = document.selection.createRange ();
+    Sel.moveStart ('character', -ctrl.value.length);
+    CaretPos = Sel.text.length;
+  }
+  // Firefox support
+  else if (ctrl.selectionStart || ctrl.selectionStart == '0')
+    CaretPos = ctrl.selectionStart;
+  return (CaretPos);
+}
+
 
  //Checks Whether input is operator or not !
 function isOperator(arr,obj)
@@ -142,13 +205,21 @@ function updateScreen()
     if (!localStorage.index_current)   
      {
       localStorage.index_current = 0;
+     } 
+     else index=localStorage.index_current-1;
+     
+
+     if (!localStorage.inputs)   
+     {
+      localStorage.inputs="";
      }
 }
 
 //Clears all inputs
  function clear_all()
  {
-   document.getElementById("display").value = "";  
+   document.getElementById("display").value = ""; 
+   index=localStorage.index_current-1; 
    stack_p = -1;
   }
 
